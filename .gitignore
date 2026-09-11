@@ -1,0 +1,23 @@
+# Vivado project files
+*.hw
+*.ip_user_files/
+*.runs/
+*.cache/
+*.sim/
+*.journal
+*.log
+*.str
+*.pb
+*.wdb
+*.bscan
+*.bin
+*.ltx
+*.dcp
+*.pcf
+*.sof
+*.svf
+*.tcl
+*.txt
+*.xsa
+*.xsim/
+*.xil/
