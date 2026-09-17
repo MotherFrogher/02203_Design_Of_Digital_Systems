@@ -1,0 +1,148 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.1 Chrome/142.0.7444.265 Electron/39.8.0 Safari/537.36" version="29.6.1">
+  <diagram name="Page-1" id="eMxomudfhG5Qo6Qa1Qic">
+    <mxGraphModel dx="1426" dy="961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bwCLCWOvp2eU100g57GC-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 0&lt;/b&gt;&lt;div&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Ack = 0&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="840" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-3" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-1" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="936" y="150" />
+              <mxPoint x="886" y="120" />
+            </Array>
+            <mxPoint x="866" y="290" as="sourcePoint" />
+            <mxPoint x="1006" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-9" connectable="0" parent="bwCLCWOvp2eU100g57GC-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Reg = 0" vertex="1">
+          <mxGeometry relative="1" x="-0.1029" y="3" as="geometry">
+            <mxPoint x="14" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-5" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 1&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;RegA &amp;lt;= AB&lt;/div&gt;&lt;div&gt;Ack = 1&lt;/div&gt;" vertex="1">
+          <mxGeometry height="101" width="101" x="932.5" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-7" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-1" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="866" y="370" as="sourcePoint" />
+            <mxPoint x="916" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-8" connectable="0" parent="bwCLCWOvp2eU100g57GC-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Req = 1" vertex="1">
+          <mxGeometry relative="1" x="-0.1666" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 2&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;div&gt;Ack = 0&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="946" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-15" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-5" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-14" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="786" y="400" as="sourcePoint" />
+            <mxPoint x="836" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-16" connectable="0" parent="bwCLCWOvp2eU100g57GC-15" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Ack = 1" vertex="1">
+          <mxGeometry relative="1" x="-0.1532" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-17" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-14" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="bwCLCWOvp2eU100g57GC-14" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="1066" y="490" />
+              <mxPoint x="1056" y="440" />
+            </Array>
+            <mxPoint x="816" y="400" as="sourcePoint" />
+            <mxPoint x="866" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-18" connectable="0" parent="bwCLCWOvp2eU100g57GC-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Req = 0" vertex="1">
+          <mxGeometry relative="1" x="0.0042" y="-1" as="geometry">
+            <mxPoint x="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-19" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 3&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;RegB &amp;lt;= AB&lt;/div&gt;" vertex="1">
+          <mxGeometry height="95" width="95" x="938.5" y="592.5" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-20" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-14" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-19" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="736" y="530" as="sourcePoint" />
+            <mxPoint x="786" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-21" connectable="0" parent="bwCLCWOvp2eU100g57GC-20" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Req = 1" vertex="1">
+          <mxGeometry relative="1" x="-0.0681" y="6" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-22" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 4&lt;/b&gt;" vertex="1">
+          <mxGeometry height="80" width="80" x="800" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-23" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-19" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-22" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="776" y="660" as="sourcePoint" />
+            <mxPoint x="826" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-25" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 5&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;if RegA &amp;gt; RegB then&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;RegA&amp;nbsp;&amp;lt;= RegA - RegB&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;else&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;RegB&amp;nbsp;&amp;lt;= RegB - RegA&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="170" x="640" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-26" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-22" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-25" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="670" y="730" as="sourcePoint" />
+            <mxPoint x="720" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-27" connectable="0" parent="bwCLCWOvp2eU100g57GC-26" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="RegA /= RegB" vertex="1">
+          <mxGeometry relative="1" x="0.0135" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-28" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-25" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="bwCLCWOvp2eU100g57GC-22" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="730" y="820" as="sourcePoint" />
+            <mxPoint x="780" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-29" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="&lt;b&gt;State 6&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;C &amp;lt;= RegA&lt;/div&gt;&lt;div&gt;Ack &amp;lt;= 1&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="100" x="660" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-30" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-22" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-29" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="740" y="590" as="sourcePoint" />
+            <mxPoint x="790" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-31" connectable="0" parent="bwCLCWOvp2eU100g57GC-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="RegA = RegB" vertex="1">
+          <mxGeometry relative="1" x="0.0699" y="-1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-32" edge="1" parent="1" source="bwCLCWOvp2eU100g57GC-29" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="765.3553390593274" y="374.64466094067257" as="sourcePoint" />
+            <mxPoint x="840" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-33" edge="1" parent="1" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" target="bwCLCWOvp2eU100g57GC-1" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="200" />
+              <mxPoint x="780" y="200" />
+              <mxPoint x="720" y="180" />
+            </Array>
+            <mxPoint x="770" y="220" as="sourcePoint" />
+            <mxPoint x="810" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bwCLCWOvp2eU100g57GC-34" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Reset = 1" vertex="1">
+          <mxGeometry height="30" width="60" x="740" y="150" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
