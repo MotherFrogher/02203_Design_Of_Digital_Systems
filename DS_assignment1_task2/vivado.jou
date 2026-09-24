@@ -23,3 +23,4 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2/DS_assignment1_task2.xpr
+update_compile_order -fileset sources_1
