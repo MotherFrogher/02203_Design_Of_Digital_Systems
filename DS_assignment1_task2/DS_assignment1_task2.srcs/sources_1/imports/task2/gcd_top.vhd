@@ -24,7 +24,8 @@ entity gcd_top is
     req   : in  std_logic;              -- input operand / start computation.
     AB    : in  unsigned(15 downto 0);  -- bus for a and b operands.
     ack   : out std_logic;              -- last input received / computation is complete.
-    C     : out unsigned(15 downto 0)); -- the result.
+    C     : out unsigned(15 downto 0); -- the result.
+    reqLED : out std_logic);
 end gcd_top;
 
 
@@ -60,7 +61,7 @@ begin
 
     u1 : debounce 
         generic map (n => n) 
-        port map (clk => clk, reset => reset, sw => req, db_level => open, db_tick => db_req);
+        port map (clk => clk, reset => reset, sw => req, db_level => reqLED, db_tick => db_req);
     u2 : gcd 
         port map (clk => clk, reset => reset, req => db_req, AB => AB, ack => ack, C => C);
 --    u3 : gcd 
