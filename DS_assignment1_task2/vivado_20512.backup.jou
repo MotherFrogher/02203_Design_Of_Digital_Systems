@@ -1,0 +1,26 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Thu Sep 24 11:01:38 2026
+# Process ID         : 20512
+# Current directory  : C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent22592 C:\Users\Jonas\Desktop\DTU\5.semester\02203_Design_Of_Digital_Systems\DS_assignment1_task2\DS_assignment1_task2.xpr
+# Log file           : C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2/vivado.log
+# Journal file       : C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2\vivado.jou
+# Running On         : Jonas
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 7 6800HS Creator Edition
+# CPU Frequency      : 3194 MHz
+# CPU Physical cores : 8
+# CPU Logical cores  : 16
+# Host memory        : 14702 MB
+# Swap memory        : 9663 MB
+# Total Virtual      : 24365 MB
+# Available Virtual  : 5604 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2/DS_assignment1_task2.xpr
+update_compile_order -fileset sources_1
