@@ -31,8 +31,6 @@ architecture fsmd of gcd is
   signal reg_a, next_reg_a, next_reg_b, reg_b, reg_c, next_reg_c : unsigned(15 downto 0);
 
   signal state, next_state : state_type;
-  
---  signal RegA_load, RegB_load, RegC_load : std_logic ;
 
 
 begin
@@ -47,9 +45,6 @@ begin
     next_reg_a <= x"0000";
     next_reg_b <= x"0000";
     next_reg_c <= x"0000";
---    RegA_load <= '0';
---    RegB_load <= '0';
---    RegC_load <= '0';
     
     case (state) is
         

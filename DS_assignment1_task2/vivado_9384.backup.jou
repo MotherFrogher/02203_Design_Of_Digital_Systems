@@ -3,10 +3,10 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Thu Sep 17 13:57:25 2026
-# Process ID         : 22188
+# Start of session at: Thu Oct  1 11:32:14 2026
+# Process ID         : 9384
 # Current directory  : C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2
-# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent20892 C:\Users\mathi\Desktop\DTU\DTU_GitHub\5_semester\Digital_Systems\Assignments\Assignment_1\Task_2\DS_assignment1_task2\DS_assignment1_task2.xpr
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent23100 C:\Users\mathi\Desktop\DTU\DTU_GitHub\5_semester\Digital_Systems\Assignments\Assignment_1\Task_2\DS_assignment1_task2\DS_assignment1_task2.xpr
 # Log file           : C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/vivado.log
 # Journal file       : C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2\vivado.jou
 # Running On         : DESKTOP-2DOS7FK
@@ -17,15 +17,12 @@
 # CPU Physical cores : 8
 # CPU Logical cores  : 8
 # Host memory        : 16506 MB
-# Swap memory        : 6710 MB
-# Total Virtual      : 23217 MB
-# Available Virtual  : 13202 MB
+# Swap memory        : 7784 MB
+# Total Virtual      : 24291 MB
+# Available Virtual  : 10457 MB
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/DS_assignment1_task2.xpr
 update_compile_order -fileset sources_1
 launch_simulation
-source gcd_tb.tcl
-relaunch_sim
-synth_design -top gcd_top -part xc7a100tcsg324-1 -lint 
-close_sim
+launch_simulation

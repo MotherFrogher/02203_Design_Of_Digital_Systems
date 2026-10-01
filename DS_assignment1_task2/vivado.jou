@@ -3,24 +3,51 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Thu Sep 24 11:01:38 2026
-# Process ID         : 20512
-# Current directory  : C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2
-# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent22592 C:\Users\Jonas\Desktop\DTU\5.semester\02203_Design_Of_Digital_Systems\DS_assignment1_task2\DS_assignment1_task2.xpr
-# Log file           : C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2/vivado.log
-# Journal file       : C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2\vivado.jou
-# Running On         : Jonas
+# Start of session at: Thu Oct  1 11:34:04 2026
+# Process ID         : 1980
+# Current directory  : C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent22644 C:\Users\mathi\Desktop\DTU\DTU_GitHub\5_semester\Digital_Systems\Assignments\Assignment_1\Task_2\DS_assignment1_task2\DS_assignment1_task2.xpr
+# Log file           : C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/vivado.log
+# Journal file       : C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2\vivado.jou
+# Running On         : DESKTOP-2DOS7FK
 # Platform           : Windows Server 2016 or Windows 10
 # Operating System   : 26200
-# Processor Detail   : AMD Ryzen 7 6800HS Creator Edition
-# CPU Frequency      : 3194 MHz
+# Processor Detail   : AMD Ryzen 7 4700U with Radeon Graphics         
+# CPU Frequency      : 1996 MHz
 # CPU Physical cores : 8
-# CPU Logical cores  : 16
-# Host memory        : 14702 MB
-# Swap memory        : 9663 MB
-# Total Virtual      : 24365 MB
-# Available Virtual  : 5604 MB
+# CPU Logical cores  : 8
+# Host memory        : 16506 MB
+# Swap memory        : 7784 MB
+# Total Virtual      : 24291 MB
+# Available Virtual  : 10677 MB
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/Jonas/Desktop/DTU/5.semester/02203_Design_Of_Digital_Systems/DS_assignment1_task2/DS_assignment1_task2.xpr
+open_project C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/DS_assignment1_task2.xpr
 update_compile_order -fileset sources_1
+launch_simulation
+source gcd_tb.tcl
+relaunch_sim
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+open_hw_manager
+connect_hw_server -allow_non_jtag
+open_hw_target
+set_property PROGRAM.FILE {C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/DS_assignment1_task2.runs/impl_1/gcd_top.bit} [get_hw_devices xc7a100t_0]
+current_hw_device [get_hw_devices xc7a100t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a100t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/DS_assignment1_task2.runs/impl_1/gcd_top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 8
+wait_on_run impl_1
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {C:/Users/mathi/Desktop/DTU/DTU_GitHub/5_semester/Digital_Systems/Assignments/Assignment_1/Task_2/DS_assignment1_task2/DS_assignment1_task2.runs/impl_1/gcd_top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+open_run impl_1
+close_sim
