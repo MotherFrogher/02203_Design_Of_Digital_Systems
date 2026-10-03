@@ -24,7 +24,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity FSM is
     Port(req, clk, N, Z, reset: in std_logic;
-        ALB, AGB, EQ: in std_logic;
         fn: out std_logic_vector(1 downto 0);
         ABorALU, LDA, LDB, ack: out std_logic);
 end FSM;
@@ -36,7 +35,7 @@ signal state, next_state : statetype;
 
 begin
 
-CL: process(state, req, reset, EQ, AGB, ALB, N, Z)
+CL: process(state, req, reset, N, Z)
 begin
     --state <= next_state;
     LDA <= '0';
@@ -79,19 +78,17 @@ begin
             
         when state5 =>
             ABorALU <= '1';
-            if EQ = '1' then
+            if Z = '1' then
                 next_state <= state9;
-            elsif EQ = '0' then
+            elsif Z = '0' then
                 next_state <= state6;
             end if;
             
          when state6 =>
-            if AGB = '1' then
-                next_state <= state7;
-            elsif ALB = '1' then
+            if N = '1' then
                 next_state <= state8;
             else
-                next_state <= state5;
+                next_state <= state7;
             end if;
             
          when state7 =>

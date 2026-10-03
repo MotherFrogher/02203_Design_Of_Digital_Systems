@@ -28,7 +28,6 @@ entity Datapath is
           AB: in unsigned(15 downto 0);
           ABorALU, LDA, LDB: in std_logic;
           FN: in std_logic_vector(1 downto 0);
-          ALB, AGB, EQ: out std_logic;
           C: out unsigned(15 downto 0);
           N, Z: out std_logic
           );
@@ -68,11 +67,6 @@ component alu is
           N:        out std_logic);         			-- result neg flag.
 end component alu;
 
-component Full_Comparator is
-    Port(a, b: in unsigned(15 downto 0);
-        AGB, ALB, EQ: out std_logic);
-end component Full_Comparator;
-
 signal C_int: unsigned(15 downto 0);
 signal LDA_sig: unsigned(15 downto 0);
 signal LDB_sig: unsigned(15 downto 0);
@@ -84,7 +78,6 @@ U2: reg port map(data_in_reg => C_int, en => LDA, data_out_reg => LDA_sig, clk =
 U3: reg port map(data_in_reg => C_int, en => LDB, data_out_reg => LDB_sig, clk => clk);
 U4: alu port map(A => LDA_sig, B => LDB_sig, fn => FN, Y => alu_sig, Z => Z, N => N);
 U5: buf port map(data_in_buf => LDA_sig, data_out_buf => C);
-U6: Full_Comparator port map (A => LDA_sig, B => LDB_sig, ALB => ALB, AGB => AGB, EQ => EQ);
 
 
 
