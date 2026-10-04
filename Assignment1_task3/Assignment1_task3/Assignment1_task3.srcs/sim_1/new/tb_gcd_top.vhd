@@ -3,18 +3,21 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity tb_gcd_top is
--- Testbench har ingen porte
 end entity tb_gcd_top;
 
 architecture testbench of tb_gcd_top is
 
-    -- Konstant for clock period (f.eks. 100 MHz -> 10 ns)
     constant CLK_PERIOD : time := 10 ns;
-
-    -- Generisk n sat lavt i testbench for hurtigere debounce-simulation
     constant N_PARAM    : integer := 2;
 
-    -- Signaler til at forbinde til UUT (Unit Under Test)
+    -- Test vectors
+    type t_ops is array (0 to 4) of integer;
+
+    variable a_ops     : t_ops := (91, 32768, 49, 29232, 25);
+    variable b_ops     : t_ops := (63, 8192, 98, 488, 5);
+    variable c_results : t_ops := (7, 8192, 49, 8, 5);
+
+    -- Signaler til UUT
     signal clk     : std_logic := '0';
     signal reset   : std_logic := '0';
     signal req     : std_logic := '0';
@@ -23,7 +26,7 @@ architecture testbench of tb_gcd_top is
     signal C       : unsigned(15 downto 0);
     signal reqLED  : std_logic;
 
-    -- Komponentdeklaration af gcd_top
+    -- Komponentdeklaration
     component gcd_top
         generic (
             n : integer := 20
@@ -41,9 +44,9 @@ architecture testbench of tb_gcd_top is
 
 begin
 
-    -----------------------------------------------------------------------------
+    -------------------------------------------------------------------------
     -- 1. Instansiering af Unit Under Test (UUT)
-    -----------------------------------------------------------------------------
+    -------------------------------------------------------------------------
     uut: gcd_top
         generic map (
             n => N_PARAM
@@ -58,9 +61,9 @@ begin
             reqLED => reqLED
         );
 
-    -----------------------------------------------------------------------------
+    -------------------------------------------------------------------------
     -- 2. Clock generator (100 MHz)
-    -----------------------------------------------------------------------------
+    -------------------------------------------------------------------------
     clk_process : process
     begin
         clk <= '0';
@@ -69,78 +72,80 @@ begin
         wait for CLK_PERIOD / 2;
     end process;
 
-    -----------------------------------------------------------------------------
+    -------------------------------------------------------------------------
     -- 3. Stimulus process
-    -----------------------------------------------------------------------------
+    -------------------------------------------------------------------------
     stim_proc: process
     begin
+
         -- System reset
         reset <= '1';
         req   <= '0';
         AB    <= (others => '0');
+
         wait for CLK_PERIOD * 5;
+
         reset <= '0';
+
         wait for CLK_PERIOD * 5;
 
-        -------------------------------------------------------------------------
-        -- BEREGNING 1: gcd(48, 18) = 6
-        -------------------------------------------------------------------------
-        -- 1a. Send operand A = 48
-        AB  <= to_unsigned(15, 16);
-        req <= '1';
-        
-        -- Vent på første Ack fra FSM (State 2)
-        wait until ack = '1';
-        wait for CLK_PERIOD * 2;
-        req <= '0';
-        wait for CLK_PERIOD * 5;
+        ---------------------------------------------------------------------
+        -- Test cases
+        ---------------------------------------------------------------------
+        for i in 0 to 4 loop
 
-        -- 1b. Send operand B = 18 og start beregning
-        AB  <= to_unsigned(7, 16);
-        req <= '1';
+            -----------------------------------------------------------------
+            -- Send operand A
+            -----------------------------------------------------------------
+            AB  <= to_unsigned(a_ops(i), 16);
+            req <= '1';
 
-        -- Vent på at beregningen færdiggøres og Ack sættes højt (State 8)
-        wait until ack = '1';
-        wait for CLK_PERIOD * 2;
-        req <= '0';
+            -- Vent på ACK fra FSM efter modtagelse af A
+            wait until ack = '1';
 
-        -- Verificer resultatet i konsollen
-        assert C = 6
-            report "FEJL: gcd(15, 7) forventede 1, men fik " & integer'image(to_integer(C))
-            severity error;
+            wait for CLK_PERIOD * 2;
+            req <= '0';
 
-        wait for CLK_PERIOD * 30;
+            wait for CLK_PERIOD * 5;
 
-        -------------------------------------------------------------------------
-        -- BEREGNING 2: gcd(35, 15) = 5
-        -------------------------------------------------------------------------
-        -- 2a. Send operand A = 35
-        AB  <= to_unsigned(35, 16);
-        req <= '1';
+            -----------------------------------------------------------------
+            -- Send operand B
+            -----------------------------------------------------------------
+            AB  <= to_unsigned(b_ops(i), 16);
+            req <= '1';
 
-        wait until ack = '1';
-        wait for CLK_PERIOD * 2;
-        req <= '0';
-        wait for CLK_PERIOD * 5;
+            -- Vent på ACK efter beregningen er færdig
+            wait until ack = '1';
 
-        -- 2b. Send operand B = 15
-        AB  <= to_unsigned(15, 16);
-        req <= '1';
+            wait for CLK_PERIOD * 2;
+            req <= '0';
 
-        wait until ack = '1';
-        wait for CLK_PERIOD * 2;
-        req <= '0';
+            -----------------------------------------------------------------
+            -- Verificer resultat
+            -----------------------------------------------------------------
+            assert C = to_unsigned(c_results(i), 16)
+                report "FEJL: gcd("
+                    & integer'image(a_ops(i))
+                    & ", "
+                    & integer'image(b_ops(i))
+                    & ") forventede "
+                    & integer'image(c_results(i))
+                    & ", men fik "
+                    & integer'image(to_integer(C))
+                severity error;
 
-        -- Verificer resultatet
-        assert C = 5
-            report "FEJL: gcd(35, 15) forventede 5, men fik " & integer'image(to_integer(C))
-            severity error;
+            -- Ekstra ventetid mellem testcases
+            wait for CLK_PERIOD * 30;
 
-        -------------------------------------------------------------------------
-        -- Slut på simulation
-        -------------------------------------------------------------------------
-        report "Simulation gennemfort succesfuldt!" severity note;
+        end loop;
+
+        ---------------------------------------------------------------------
+        -- Simulation afsluttet
+        ---------------------------------------------------------------------
+        report "Alle 5 GCD-tests gennemfort succesfuldt!" severity note;
+
         wait;
+
     end process;
 
 end architecture testbench;
