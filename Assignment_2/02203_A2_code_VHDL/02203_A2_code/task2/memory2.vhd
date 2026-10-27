@@ -110,19 +110,19 @@ begin
     end process;
 
     -----------------------------------
-    -- Triger dumping of image
+    -- Trigger dumping of image
     process(dump_image) is
         procedure WriteImage(
             constant FileName     : in string;
             constant StartAddress : in integer;
             constant Width        : in integer;
             constant Height       : in integer) is
-            file imgFile : text open write_mode is FileName;
-            variable l        : line;
-            variable addr     : integer := 0;
-            variable lastAddr : integer := 0;
-            variable tmp      : integer := 0;
-            variable b        : natural := 0;
+            file     imgFile      : text open write_mode is FileName;
+            variable l            : line;
+            variable addr         : integer := 0;
+            variable lastAddr     : integer := 0;
+            variable tmp          : integer := 0;
+            variable b            : natural := 0;
         begin
             lastAddr := StartAddress + Width / 4 * Height - 1;
 
