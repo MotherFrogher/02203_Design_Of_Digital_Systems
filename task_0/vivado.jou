@@ -23,3 +23,29 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/task_0/task_0.xpr
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/Assignment_2/02203_A2_code_VHDL/02203_A2_code/task2/pic1.pgm] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/Assignment_2/02203_A2_code_VHDL/02203_A2_code/task2/pic1.pgm
+launch_simulation
+source testbench.tcl
+run 5 ms
+relaunch_sim
+relaunch_sim
+relaunch_sim
+close_sim
+launch_simulation
+source testbench.tcl
+relaunch_sim
+close_sim
+launch_simulation
+source testbench.tcl
+relaunch_sim
+close_sim
+launch_simulation
+source testbench.tcl
+relaunch_sim
+step
+run 5 ms
+run 5 ms
+run 10 ms
+run 10 ms
