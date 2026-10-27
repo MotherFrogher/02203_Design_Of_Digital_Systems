@@ -2,8 +2,8 @@
 --
 --  Title      :  Edge-Detection design project - task 2.
 --             :
---  Developers :  YOUR NAME HERE - s??????@student.dtu.dk
---             :  YOUR NAME HERE - s??????@student.dtu.dk
+--  Developers : Jonas Beck Jensen - s240324@dtu.dk
+--             : Christian Brandt Staunsbjerg - s244770@dtu.dk
 --             :
 --  Purpose    :  This design contains an entity for the accelerator that must be build
 --             :  in task two of the Edge Detection design project. It contains an
@@ -80,12 +80,12 @@ process(current_state, start)
     finish        <= '0';
     dataW         <= x"00000000";
     addr          <= x"0000";
-    read_addr_reg <= x"0000";
     
     
 case current_state is
     
    when IDLE =>
+     read_addr_reg <= x"0000";
      if start = '1' then
        next_state <= READ;      
      else
@@ -103,7 +103,6 @@ case current_state is
     
    when BUFF =>
         data_reg     <= dataR;
-        en           <= '1';
         addr         <= std_logic_vector(read_addr_reg + mem_offset);
      next_state   <= Write;
     
@@ -119,7 +118,7 @@ case current_state is
        next_state  <= DONE;
      else 
          read_addr_reg <= read_addr_reg +1;
-       next_state    <= WRITE;
+       next_state    <= READ;
    end if;
     
        
