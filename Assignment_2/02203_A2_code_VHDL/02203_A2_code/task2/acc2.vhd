@@ -2,8 +2,8 @@
 --
 --  Title      :  Edge-Detection design project - task 2.
 --             :
---  Developers : Jonas Beck Jensen - s240324@dtu.dk
---             : Christian Brandt Staunsbjerg - s244770@dtu.dk
+--  Developers : Christian Brandt Staunsbjerg - s244770@dtu.dk
+--             : 
 --             :
 --  Purpose    :  This design contains an entity for the accelerator that must be build
 --             :  in task two of the Edge Detection design project. It contains an
@@ -26,8 +26,8 @@ use work.types.all;
 
 entity acc is
     port(
-        Px0,Px1,Px2,Px3,Px4,Px5,Px6,Px7,Px8    : in  unsigned (7 downto 0);             -- The clock.
-        output  : out  unsigned ( 7 downto 0)-- The reset signal. Active high.
+        Px0,Px1,Px2,Px3,Px4,Px5,Px6,Px7,Px8    : in  unsigned (7 downto 0);
+        output  : out  unsigned ( 7 downto 0)
     );
 end acc;
 
@@ -37,9 +37,8 @@ architecture behavioral of acc is
     signal Dn_sum : unsigned (10 downto 0); 
     signal Dn : unsigned ( 7 downto 0 );
 begin
-    
-    Dx <= signed("000"&Px2)-signed("000"&Px0)+shift_left(signed("000"&Px5)-signed("000"&Px3),1)+signed("000"&Px8)-signed("000"&Px6);
-    Dy <= signed("000"&Px0)-signed("000"&Px6)+shift_left(signed("000"&Px1)-signed("000"&Px7),1)+signed("000"&Px2)-signed("000"&Px8);
+    Dx <= signed("000" & Px2) - signed("000" & Px0) + signed("00" & Px5 & '0') - signed("00" & Px3 & '0') + signed("000" & Px8) - signed("000" & Px6);
+    Dy <= signed("000" & Px0) - signed("000" & Px6) + signed("00" & Px1 & '0') - signed("00" & Px7 & '0') + signed("000" & Px2) - signed("000" & Px8);
     Dn_sum <= unsigned(abs(Dx)) + unsigned(abs(Dy));  
     Dn <= "11111111" when Dn_sum>255 else unsigned(Dn_sum(7 downto 0));
     output <= Dn;
