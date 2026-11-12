@@ -3,10 +3,10 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Thu Nov  5 09:53:52 2026
-# Process ID         : 22420
+# Start of session at: Thu Nov 12 10:29:38 2026
+# Process ID         : 11016
 # Current directory  : C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/task_2
-# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent31268 C:\Users\Jonas\Desktop\DTU\5_semester\02203_Design_Of_Digital_Systems\task_2\task_2.xpr
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent3028 C:\Users\Jonas\Desktop\DTU\5_semester\02203_Design_Of_Digital_Systems\task_2\task_2.xpr
 # Log file           : C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/task_2/vivado.log
 # Journal file       : C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/task_2\vivado.jou
 # Running On         : Jonas
@@ -19,6 +19,7 @@
 # Host memory        : 14702 MB
 # Swap memory        : 13421 MB
 # Total Virtual      : 28123 MB
-# Available Virtual  : 7526 MB
+# Available Virtual  : 17431 MB
 #-----------------------------------------------------------
 start_gui
+open_project C:/Users/Jonas/Desktop/DTU/5_semester/02203_Design_Of_Digital_Systems/task_2/task_2.xpr
