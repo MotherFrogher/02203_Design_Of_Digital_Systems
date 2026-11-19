@@ -14,7 +14,7 @@ entity Cache_decoder is
     Port ( 
            WCh_Cnt                                    : in STD_LOGIC_VECTOR (1 downto 0);
            X_Cnt                                      : in STD_LOGIC_VECTOR (7 downto 0);
-           Y_Cnt                                      : in STD_LOGIC_VECTOR (9 downto 0);
+           Y_Cnt                                      : in STD_LOGIC_VECTOR (8 downto 0);
            Word_in0, Word_in1, Word_in2, Word_in3     : in STD_LOGIC_VECTOR (31 downto 0);
            Word_in4, Word_in5, Word_in6, Word_in7     : in STD_LOGIC_VECTOR (31 downto 0);
            Word_in8, Word_in9, Word_in10, Word_in11   : in STD_LOGIC_VECTOR (31 downto 0);

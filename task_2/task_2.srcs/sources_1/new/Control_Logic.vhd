@@ -6,13 +6,15 @@ use work.types.all;
 entity Control_Logic is
     Port ( WCh_Cnt : out STD_LOGIC_VECTOR (1 downto 0);
            RCh_Cnt : out STD_LOGIC_VECTOR (1 downto 0);
-           px_Sel : out STD_LOGIC_VECTOR (1 downto 0);
+           --px_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            clk : in STD_LOGIC;
            RAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
            WAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
            W_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            R_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            R_en : out STD_LOGIC;
+           X_Cnt : out std_logic_vector(7 downto 0);
+           Y_Cnt : out std_logic_vector(8 downto 0);
            reset : in std_logic;
            start : in STD_LOGIC;
            finish : out STD_LOGIC);
@@ -24,8 +26,8 @@ type state_type is (IDLE, PRELOAD, PRE_WR, RUN, DRAIN, DONE);
 signal state, next_state : state_type;
 
 signal Rd_Cnt : unsigned(1 downto 0);
-signal X_Cnt : unsigned(7 downto 0);
-signal Y_Cnt : unsigned(8 downto 0);
+signal X_Cnt_u : unsigned(7 downto 0);
+signal Y_Cnt_u : unsigned(8 downto 0);
 signal RCh_Cnt_u, WCh_Cnt_u : unsigned(1 downto 0);
 signal RAddr_Cnt_u, WAddr_Cnt_u : unsigned(15 downto 0);
 signal RAddr_Cnt_u88, RAddr_Cnt_u176 : unsigned(15 downto 0);
@@ -57,7 +59,7 @@ begin
 end process;
 
 --FSM
-process(state, start, RCh_Cnt_u, WCh_Cnt_u, Rd_Cnt, RAddr_Cnt_u, X_Cnt, Y_Cnt)
+process(state, start, RCh_Cnt_u, WCh_Cnt_u, Rd_Cnt, RAddr_Cnt_u, X_Cnt_u, Y_Cnt_u)
 begin
     next_state <= state;
     R_active <= '0';
@@ -106,7 +108,7 @@ begin
          when DRAIN =>
             W_active <= '1';
             
-            if X_Cnt = X_MAX and Y_Cnt = Y_MAX then
+            if X_Cnt_u = X_MAX and Y_Cnt_u = Y_MAX then
                 next_state <= DONE;
             else
                 next_state <= state;
@@ -162,10 +164,10 @@ begin
         if reset = '0' then
             X_Cnt <= (others => '0');
         elsif W_active = '1' then
-            if X_Cnt = X_MAX then
+            if X_Cnt_u = X_MAX then
                 X_Cnt <= (others => '0');
             else
-                X_Cnt <= X_Cnt + 1;
+                X_Cnt_u <= X_Cnt_u + 1;
             end if;
         end if;
     end if;
@@ -176,11 +178,11 @@ begin
     if rising_edge(clk) then
         if reset = '0' then
             Y_Cnt <= (others => '0');
-        elsif W_active = '1' and X_Cnt = X_MAX then   -- same edge X wraps
-            if Y_Cnt = Y_MAX then
-                Y_Cnt <= (others => '0');
+        elsif W_active = '1' and X_Cnt_u = X_MAX then   -- same edge X wraps
+            if Y_Cnt_u = Y_MAX then
+                Y_Cnt_u <= (others => '0');
             else
-                Y_Cnt <= Y_Cnt + 1;
+                Y_Cnt_u <= Y_Cnt_u + 1;
             end if;
         end if;
     end if;
@@ -218,6 +220,9 @@ end process;
 
 
 --OUTPUT SIGNALS
+X_Cnt <= std_logic_vector(X_Cnt_u);
+Y_Cnt <= std_logic_vector(Y_Cnt_u);
+
 RAddr_Cnt <= std_logic_vector(RAddr_Cnt_u) when Rd_Cnt = "00" else
              std_logic_vector(RAddr_Cnt_u88) when Rd_Cnt = "01" else
              std_logic_vector(RAddr_Cnt_u176) when Rd_Cnt = "10";
@@ -226,13 +231,14 @@ WAddr_Cnt <= std_logic_vector(WAddr_Cnt_u + 25343);
 RCh_Cnt    <= std_logic_vector(RCh_Cnt_u);
 WCh_Cnt <= std_logic_vector(WCh_Cnt_u);
 
-
+-- DISABLE IF PX MIRRORING WORKS
 -- "11" = Discard all pixels, "10" = Discard left px
 -- "01" = Discard right px, "00" = Discard no px.
-px_Sel <= "11" when (Y_Cnt <= 0 or Y_Cnt <= Y_MAX) else
-          "10" when X_Cnt <= 0 else
-          "01" when X_Cnt <= 87 else
-          "00";
+--px_Sel <= "11" when (Y_Cnt_u <= 0 or Y_Cnt_u <= Y_MAX) else
+--          "10" when X_Cnt_u <= 0 else
+--         "01" when X_Cnt_u <= 87 else
+--          "00";
+px_Sel <= "00";
           
 R_en <= R_active;
 
