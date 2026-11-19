@@ -27,7 +27,9 @@ use IEEE.NUMERIC_STD.ALL;
 entity acc_top is
     port(
         Px0,Px1,Px2,Px3,Px4,Px5,Px6,Px7,Px8,Px9,Px10,Px11,Px12,Px13,Px14,Px15,Px16,Px17: in  unsigned (7 downto 0);            
-        output1,output2,output3,output4  : out  unsigned ( 7 downto 0)
+        output1,output2,output3,output4  : out  unsigned ( 7 downto 0);
+        px_Sel : in std_logic_vector(1 downto 0);
+        OUTPUT : out std_logic_vector(31 downto 0)
     );
 end acc_top;
 
@@ -40,7 +42,27 @@ architecture Behavioral of acc_top is
         );
     end component acc;
 
+signal OUTPUT_MUX : unsigned(31 downto 0);
+signal output1_sig, output2_sig, output3_sig, output4_sig : unsigned(7 downto 0);
+
 begin
+
+output1 <= output1_sig;
+output2 <= output2_sig;
+output3 <= output3_sig;
+output4 <= output4_sig;
+
+
+-- DISABLEd IF PX MIRRORING WORKS
+-- "11" = Discard all pixels, "10" = Discard left px
+-- "01" = Discard right px, "00" = Discard no px.
+OUTPUT_MUX <= (others => '0') when px_Sel = "11" else
+              x"00" & output3_sig & output4_sig when px_Sel = "10" else
+              output1_sig & output2_sig & x"00" when px_Sel = "01" else
+              output1_sig & output2_sig & output3_sig & output4_sig;
+              
+OUTPUT <= std_logic_vector(OUTPUT_MUX);
+
     ACC_1 : acc
         port map(
             Px0 => Px0,
@@ -52,7 +74,7 @@ begin
             Px6 => Px12,
             Px7 => Px13,
             Px8 => Px14,
-            output => output1
+            output => output1_sig
         );
      ACC_2 : acc
         port map(
@@ -65,7 +87,7 @@ begin
             Px6 => Px13,
             Px7 => Px14,
             Px8 => Px15,
-            output => output2
+            output => output2_sig
         );
      ACC_3 : acc
         port map(
@@ -78,7 +100,7 @@ begin
             Px6 => Px14,
             Px7 => Px15,
             Px8 => Px16,
-            output => output3
+            output => output3_sig
         );
      ACC_4 : acc
         port map(
@@ -91,7 +113,7 @@ begin
             Px6 => Px15,
             Px7 => Px16,
             Px8 => Px17,
-            output => output4
+            output => output4_sig
         );
        
 end Behavioral;

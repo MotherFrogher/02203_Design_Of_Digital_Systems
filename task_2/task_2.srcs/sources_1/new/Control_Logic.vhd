@@ -6,7 +6,7 @@ use work.types.all;
 entity Control_Logic is
     Port ( WCh_Cnt : out STD_LOGIC_VECTOR (1 downto 0);
            RCh_Cnt : out STD_LOGIC_VECTOR (1 downto 0);
-           --px_Sel : out STD_LOGIC_VECTOR (1 downto 0);
+           px_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            clk : in STD_LOGIC;
            RAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
            WAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
