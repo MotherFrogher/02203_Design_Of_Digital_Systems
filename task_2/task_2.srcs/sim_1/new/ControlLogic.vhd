@@ -20,7 +20,10 @@ architecture bench of Control_Logic_tb is
            WAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
            W_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            R_Sel : out STD_LOGIC_VECTOR (1 downto 0);
+           X_Cnt : out std_logic_vector (7 downto 0);
+           Y_Cnt : out std_logic_vector (8 downto 0);
            R_en : out STD_LOGIC;
+           W_en : out std_logic;
            reset : in std_logic;
            start : in STD_LOGIC;
            finish : out STD_LOGIC);
@@ -34,7 +37,10 @@ architecture bench of Control_Logic_tb is
   signal WAddr_Cnt: STD_LOGIC_VECTOR (15 downto 0);
   signal W_Sel: STD_LOGIC_VECTOR (1 downto 0);
   signal R_Sel: STD_LOGIC_VECTOR (1 downto 0);
+  signal X_Cnt : std_logic_vector (7 downto 0);
+  signal Y_Cnt : std_logic_vector (8 downto 0);
   signal R_en: STD_LOGIC;
+  signal W_en: std_logic;
   signal reset: std_logic;
   signal start: STD_LOGIC;
   signal finish: STD_LOGIC;
@@ -52,7 +58,10 @@ begin
                                 WAddr_Cnt => WAddr_Cnt,
                                 W_Sel     => W_Sel,
                                 R_Sel     => R_Sel,
+                                X_Cnt     => X_Cnt,
+                                Y_Cnt     => Y_Cnt,
                                 R_en      => R_en,
+                                W_en      => W_en,
                                 reset     => reset,
                                 start     => start,
                                 finish    => finish );
@@ -60,21 +69,20 @@ begin
   stimulus: process
   begin
 
-    -- Put initialisation code here
+  start <= '0';
+  reset <= '0';
+  wait for 25 ns;                       -- hold reset over a few clock edges
+  reset <= '1';
+  wait for 20 ns;
 
-    reset <= '0';
-    wait for 5 ns;
-    reset <= '1';
-    wait for 5 ns;
-    start <= '1';
-    wait for 10 ns;
-    start <= '0';
-    wait for 30 ms;
+  start <= '1';                         -- one-clock start pulse
+  wait for clock_period;
+  start <= '0';
 
-    -- Put test bench stimulus code here
-
-    stop_the_clock <= true;
-    wait;
+  wait until finish = '1';     -- ~101,400 cycles = ~1.02 ms
+  wait for 2 * clock_period;            -- so the finish pulse shows in the waveform
+  stop_the_clock <= true;               -- clock process exits, no more events
+  wait;
   end process;
 
   clocking: process

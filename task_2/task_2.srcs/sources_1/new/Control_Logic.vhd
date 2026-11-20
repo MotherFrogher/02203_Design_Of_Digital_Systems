@@ -13,6 +13,7 @@ entity Control_Logic is
            W_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            R_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            R_en : out STD_LOGIC;
+           W_en : out std_logic;
            X_Cnt : out std_logic_vector(7 downto 0);
            Y_Cnt : out std_logic_vector(8 downto 0);
            reset : in std_logic;
@@ -39,7 +40,7 @@ signal R_active, W_active : std_logic;
 constant X_MAX     : natural := 87;
 constant Y_MAX     : natural := 287;
 constant RADDR_MAX : natural := 25343;
-constant WADDR_MAX : natural := 50687;
+constant WADDR_MAX : natural := 25343;
 
 begin
 
@@ -77,14 +78,14 @@ begin
         when PRELOAD =>
             R_active <= '1';
             
-            if RCh_Cnt_u = 3 and Rd_Cnt = 3 then
+            if RCh_Cnt_u = 3 and Rd_Cnt = "10" then
                 next_state <= PRE_WR;
             else
                 next_state <= state;
             end if;
         
         when PRE_WR =>
-            R_active <= '0';
+            R_active <= '1';
             W_active <= '1';
             
             if WCh_Cnt_u = 1 then
@@ -96,7 +97,7 @@ begin
         when RUN =>
             if Rd_Cnt = 3 then
                 W_active <= '1';
-                R_active <= '0';
+                R_active <= '1';
                 if RAddr_Cnt_u = RADDR_MAX then
                     next_state <= DRAIN;
                 end if;
@@ -130,7 +131,12 @@ begin
     if rising_edge(clk) then
         if reset = '0' or Rd_Cnt = "11" then
             Rd_Cnt <= "00";
-        elsif R_active = '1' then
+        elsif State = PRELOAD and R_active = '1' then
+            Rd_Cnt <= Rd_Cnt + 1;
+                if Rd_Cnt = "10" then
+                    Rd_Cnt <= "00";
+                end if;
+        elsif State = RUN and R_active = '1' then
             Rd_Cnt <= Rd_Cnt + 1;
         end if;
     end if;
@@ -141,6 +147,8 @@ begin
     if rising_edge(clk) then
         if reset = '0' then
             RCh_Cnt_u <= "00";
+        elsif State = PRELOAD and Rd_Cnt = "10" and R_active = '1' then
+            RCh_Cnt_u <= RCh_Cnt_u + 1;
         elsif Rd_Cnt = "11" and R_active = '1' then
             RCh_Cnt_u <= RCh_Cnt_u + 1;      -- 2 bits, wraps on its own
         end if;
@@ -162,10 +170,10 @@ X_COUNTER: process(clk)
 begin
     if rising_edge(clk) then
         if reset = '0' then
-            X_Cnt <= (others => '0');
+            X_Cnt_u <= (others => '0');
         elsif W_active = '1' then
             if X_Cnt_u = X_MAX then
-                X_Cnt <= (others => '0');
+                X_Cnt_u <= (others => '0');
             else
                 X_Cnt_u <= X_Cnt_u + 1;
             end if;
@@ -177,7 +185,7 @@ Y_COUNTER: process(clk)
 begin
     if rising_edge(clk) then
         if reset = '0' then
-            Y_Cnt <= (others => '0');
+            Y_Cnt_u <= (others => '0');
         elsif W_active = '1' and X_Cnt_u = X_MAX then   -- same edge X wraps
             if Y_Cnt_u = Y_MAX then
                 Y_Cnt_u <= (others => '0');
@@ -193,7 +201,13 @@ begin
     if rising_edge(clk) then
         if reset = '0' then
             RAddr_Cnt_u <= (others => '0');
-        elsif Rd_Cnt = "11" then
+        elsif state = PRELOAD and Rd_Cnt = "10" then
+            if RAddr_Cnt_u = RADDR_MAX then
+                RAddr_Cnt_u <= (others => '0');
+            else
+                RAddr_Cnt_u <= RAddr_Cnt_u + 1;
+            end if;
+        elsif state = RUN and Rd_Cnt = "11" then
             if RAddr_Cnt_u = RADDR_MAX then
                 RAddr_Cnt_u <= (others => '0');
             else
@@ -227,7 +241,7 @@ RAddr_Cnt <= std_logic_vector(RAddr_Cnt_u) when Rd_Cnt = "00" else
              std_logic_vector(RAddr_Cnt_u88) when Rd_Cnt = "01" else
              std_logic_vector(RAddr_Cnt_u176) when Rd_Cnt = "10";
              
-WAddr_Cnt <= std_logic_vector(WAddr_Cnt_u + 25343);
+WAddr_Cnt <= std_logic_vector(WAddr_Cnt_u + 25344);
 RCh_Cnt    <= std_logic_vector(RCh_Cnt_u);
 WCh_Cnt <= std_logic_vector(WCh_Cnt_u);
 
@@ -241,6 +255,8 @@ WCh_Cnt <= std_logic_vector(WCh_Cnt_u);
 px_Sel <= "00";
           
 R_en <= R_active;
+
+W_en <= W_active;
 
 W_Sel <= "10" when W_active = '1' and WCh_Cnt_u = 1 and state = PRE_WR else
          "01";
