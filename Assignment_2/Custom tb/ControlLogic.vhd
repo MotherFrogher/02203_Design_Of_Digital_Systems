@@ -16,8 +16,7 @@ architecture bench of Control_Logic_tb is
            RCh_Cnt : out STD_LOGIC_VECTOR (1 downto 0);
            px_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            clk : in STD_LOGIC;
-           RAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
-           WAddr_Cnt : out STD_LOGIC_VECTOR (15 downto 0);
+           Addr : out STD_LOGIC_VECTOR (15 downto 0);
            W_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            R_Sel : out STD_LOGIC_VECTOR (1 downto 0);
            X_Cnt : out std_logic_vector (7 downto 0);
@@ -33,8 +32,7 @@ architecture bench of Control_Logic_tb is
   signal RCh_Cnt: STD_LOGIC_VECTOR (1 downto 0);
   signal px_Sel: STD_LOGIC_VECTOR (1 downto 0);
   signal clk: STD_LOGIC;
-  signal RAddr_Cnt: STD_LOGIC_VECTOR (15 downto 0);
-  signal WAddr_Cnt: STD_LOGIC_VECTOR (15 downto 0);
+  signal Addr: STD_LOGIC_VECTOR (15 downto 0);
   signal W_Sel: STD_LOGIC_VECTOR (1 downto 0);
   signal R_Sel: STD_LOGIC_VECTOR (1 downto 0);
   signal X_Cnt : std_logic_vector (7 downto 0);
@@ -54,8 +52,7 @@ begin
                                 RCh_Cnt  => RCh_Cnt,
                                 px_Sel    => px_Sel,
                                 clk       => clk,
-                                RAddr_Cnt => RAddr_Cnt,
-                                WAddr_Cnt => WAddr_Cnt,
+                                Addr      => Addr,
                                 W_Sel     => W_Sel,
                                 R_Sel     => R_Sel,
                                 X_Cnt     => X_Cnt,

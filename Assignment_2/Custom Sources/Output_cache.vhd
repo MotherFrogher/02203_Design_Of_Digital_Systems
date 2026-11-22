@@ -34,7 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Output_cache is
     Port ( RESET : in STD_LOGIC;
            CLK : in STD_LOGIC;
-           W_Sel : in STD_LOGIC;
+           W_Sel : in STD_LOGIC_VECTOR (1 downto 0);
            W_En : in STD_LOGIC;
            Word0 : in STD_LOGIC_VECTOR (31 downto 0);
            Word1 : in STD_LOGIC_VECTOR (31 downto 0);
@@ -64,9 +64,9 @@ begin
     begin
         CEn <= "00";
         case W_sel is
-            when '0' =>
+            when "01" =>
                 CEn(0) <= '1' and W_en;
-            when '1' =>
+            when "10" =>
                 CEn(1) <= '1' and W_en;
             when others =>
                 CEn <= "00";
@@ -84,9 +84,9 @@ begin
     OMUX: process(W_Sel, RAM0, RAM1)
     begin
         case W_sel is
-            when '0' =>
+            when "01" =>
                 RAM_out <= RAM0;
-            when '1' =>
+            when "10" =>
                 RAM_out <= RAM1;
             when others =>
                 RAM_out <= RAM0;
