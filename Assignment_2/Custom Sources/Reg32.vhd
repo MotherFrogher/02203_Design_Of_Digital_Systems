@@ -45,7 +45,7 @@ begin
 
     process(RESET, CLK) is
     begin
-        if RESET = '0' then
+        if RESET = '1' then
             Q_out <= x"00000000";
         elsif rising_edge(CLK) then
             if EN0 = '1' and EN1 = '1' then

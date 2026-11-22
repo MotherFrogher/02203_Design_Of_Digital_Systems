@@ -108,6 +108,8 @@ begin
         
          when DRAIN =>
             W_active <= '1';
+            R_active <= '1';
+            
             
             if X_Cnt_u = X_MAX and Y_Cnt_u = Y_MAX then
                 next_state <= DONE;
@@ -253,11 +255,11 @@ WCh_Cnt <= std_logic_vector(WCh_Cnt_u);
 -- DISABLE IF PX MIRRORING WORKS
 -- "11" = Discard all pixels, "10" = Discard left px
 -- "01" = Discard right px, "00" = Discard no px.
-px_Sel <= "11" when (Y_Cnt_u <= 0 or Y_Cnt_u <= Y_MAX) else
-          "10" when X_Cnt_u <= 0 else
-         "01" when X_Cnt_u <= 87 else
-          "00";
---px_Sel <= "00";
+--px_Sel <= "11" when (Y_Cnt_u <= 0 or Y_Cnt_u <= Y_MAX) else
+--          "10" when X_Cnt_u <= 0 else
+--         "01" when X_Cnt_u <= 87 else
+--          "00";
+px_Sel <= "00";
           
 R_en <= R_active;
 
