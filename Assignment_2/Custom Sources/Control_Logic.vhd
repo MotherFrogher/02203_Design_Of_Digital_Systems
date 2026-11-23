@@ -31,7 +31,7 @@ signal Y_Cnt_u : unsigned(8 downto 0);
 signal RAddr_Cnt, WAddr_Cnt : std_logic_vector(15 downto 0);
 signal RCh_Cnt_u, WCh_Cnt_u : unsigned(1 downto 0);
 signal RAddr_Cnt_u, WAddr_Cnt_u : unsigned(15 downto 0);
-signal RAddr_Cnt_u88, RAddr_Cnt_u176 : unsigned(15 downto 0);
+signal RAddr_Cnt_up, RAddr_Cnt_down : unsigned(15 downto 0);
 
 
 signal R_active, W_active : std_logic;
@@ -41,11 +41,12 @@ constant X_MAX     : natural := 87;
 constant Y_MAX     : natural := 287;
 constant RADDR_MAX : natural := 25343;
 constant WADDR_MAX : natural := 25343;
+constant LAST_ROW  : natural := 25256;
 
 begin
 
-RAddr_Cnt_u88 <= RAddr_Cnt_u + 88;
-RAddr_Cnt_u176 <= RAddr_Cnt_u88 + 88;
+RAddr_Cnt_up <= RAddr_Cnt_u when RAddr_Cnt_u < 88 else RAddr_Cnt_u - 88;
+RAddr_Cnt_down <= RAddr_Cnt_u when RAddr_Cnt_u >= LAST_ROW else RAddr_Cnt_u + 88;
 
 --States
 process(clk, reset)
@@ -78,7 +79,7 @@ begin
         when PRELOAD =>
             R_active <= '1';
             
-            if RCh_Cnt_u = 3 and Rd_Cnt = "10" then
+            if RCh_Cnt_u = 3 and Rd_Cnt = "11" then
                 next_state <= PRE_WR;
             else
                 next_state <= state;
@@ -95,15 +96,15 @@ begin
             end if;
         
         when RUN =>
+            R_active <= '1';
             if Rd_Cnt = 3 then
                 W_active <= '1';
-                R_active <= '1';
-                if RAddr_Cnt_u = RADDR_MAX then
-                    next_state <= DRAIN;
-                end if;
+            end if;
+            
+            if RAddr_Cnt_u = RADDR_MAX then
+                next_state <= DRAIN;
             else
                 next_state <= state;
-                R_active <= '1';
             end if;
         
          when DRAIN =>
@@ -133,12 +134,7 @@ begin
     if rising_edge(clk) then
         if reset = '1' or Rd_Cnt = "11" then
             Rd_Cnt <= "00";
-        elsif State = PRELOAD and R_active = '1' then
-            Rd_Cnt <= Rd_Cnt + 1;
-                if Rd_Cnt = "10" then
-                    Rd_Cnt <= "00";
-                end if;
-        elsif State = RUN and R_active = '1' then
+        elsif (state = PRELOAD or state = RUN) and R_active = '1' then
             Rd_Cnt <= Rd_Cnt + 1;
         end if;
     end if;
@@ -149,8 +145,8 @@ begin
     if rising_edge(clk) then
         if reset = '1' then
             RCh_Cnt_u <= "00";
-        elsif State = PRELOAD and Rd_Cnt = "10" and R_active = '1' then
-            RCh_Cnt_u <= RCh_Cnt_u + 1;
+--        elsif State = PRELOAD and Rd_Cnt = "10" and R_active = '1' then
+--            RCh_Cnt_u <= RCh_Cnt_u + 1;
         elsif Rd_Cnt = "11" and R_active = '1' then
             RCh_Cnt_u <= RCh_Cnt_u + 1;      -- 2 bits, wraps on its own
         end if;
@@ -203,18 +199,18 @@ begin
     if rising_edge(clk) then
         if reset = '1' then
             RAddr_Cnt_u <= (others => '0');
-        elsif state = PRELOAD and Rd_Cnt = "10" then
+        elsif (state = PRELOAD or state = RUN) and Rd_Cnt = "11" then
             if RAddr_Cnt_u = RADDR_MAX then
                 RAddr_Cnt_u <= (others => '0');
             else
                 RAddr_Cnt_u <= RAddr_Cnt_u + 1;
             end if;
-        elsif state = RUN and Rd_Cnt = "11" then
-            if RAddr_Cnt_u = RADDR_MAX then
-                RAddr_Cnt_u <= (others => '0');
-            else
-                RAddr_Cnt_u <= RAddr_Cnt_u + 1;
-            end if;
+--        elsif state = RUN and Rd_Cnt = "11" then
+--            if RAddr_Cnt_u = RADDR_MAX then
+--                RAddr_Cnt_u <= (others => '0');
+--            else
+--                RAddr_Cnt_u <= RAddr_Cnt_u + 1;
+--            end if;
         end if;
     end if;
 end process;
@@ -243,9 +239,9 @@ Addr <= RAddr_Cnt when R_active = '1' and W_active = '0' else
         WAddr_Cnt when R_active = '1' and W_active = '1' else
         (others => '0');
 
-RAddr_Cnt <= std_logic_vector(RAddr_Cnt_u) when Rd_Cnt = "00" else
-             std_logic_vector(RAddr_Cnt_u88) when Rd_Cnt = "01" else
-             std_logic_vector(RAddr_Cnt_u176) when Rd_Cnt = "10" else
+RAddr_Cnt <= std_logic_vector(RAddr_Cnt_up) when Rd_Cnt = "00" else
+             std_logic_vector(RAddr_Cnt_u) when Rd_Cnt = "01" else
+             std_logic_vector(RAddr_Cnt_down) when Rd_Cnt = "10" else
              (others => '-');
              
 WAddr_Cnt <= std_logic_vector(WAddr_Cnt_u + RADDR_MAX + 1);
@@ -255,9 +251,9 @@ WCh_Cnt <= std_logic_vector(WCh_Cnt_u);
 -- DISABLE IF PX MIRRORING WORKS
 -- "11" = Discard all pixels, "10" = Discard left px
 -- "01" = Discard right px, "00" = Discard no px.
---px_Sel <= "11" when (Y_Cnt_u <= 0 or Y_Cnt_u <= Y_MAX) else
---          "10" when X_Cnt_u <= 0 else
---         "01" when X_Cnt_u <= 87 else
+--px_Sel <= "11" when (Y_Cnt_u = 0 or Y_Cnt_u = Y_MAX) else
+--          "10" when X_Cnt_u = 0 else
+--         "01" when X_Cnt_u = 87 else
 --          "00";
 px_Sel <= "00";
           

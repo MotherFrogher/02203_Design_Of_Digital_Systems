@@ -32,7 +32,7 @@ begin
 -- "01" = Discard right px, "00" = Discard no px.
 OUTPUT_MUX <= (others => '0') when px_Sel = "11" else
               output4_sig & output3_sig & output2_sig & x"00" when px_Sel = "10" else
-              x"00" & output2_sig & output3_sig & output4_sig when px_Sel = "01" else
+              x"00" & output3_sig & output2_sig & output1_sig when px_Sel = "01" else
               output4_sig & output3_sig & output2_sig & output1_sig;
               
 

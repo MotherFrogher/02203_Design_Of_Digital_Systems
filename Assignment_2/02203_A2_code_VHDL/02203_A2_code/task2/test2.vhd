@@ -119,7 +119,7 @@ begin
 
     Memory : memory2
         generic map(
-            load_file_name => "C:\Users\bab09\github\02203_Design_Of_Digital_Systems\Assignment_2\02203_A2_code_VHDL\02203_A2_code\other_images\kaleidoscope.pgm"
+            load_file_name => "C:\Users\bab09\github\02203_Design_Of_Digital_Systems\Assignment_2\02203_A2_code_VHDL\02203_A2_code\other_images\pattern.pgm"
         )
         -- Result is saved to: load_file_name & "_result.pgm"
         port map(

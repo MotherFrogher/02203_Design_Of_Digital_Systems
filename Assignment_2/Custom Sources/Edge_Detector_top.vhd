@@ -134,16 +134,17 @@ U1: Input_cache port map(
                     Word10 => Word10_sig,
                     Word11 => Word11_sig
                     );
-                    
-U2: Output_cache port map(
-                    RESET => reset,
-                    CLK => clk,
-                    W_Sel => W_Sel_sig,
-                    W_En => W_En_sig,
-                    Word0 => WordOut,
-                    Word1 => WordOut,
-                    RAM_out => dataW
-                    );
+
+dataW <= WordOut;                    
+--U2: Output_cache port map(
+--                    RESET => reset,
+--                    CLK => clk,
+--                    W_Sel => W_Sel_sig,
+--                    W_En => W_En_sig,
+--                    Word0 => WordOut,
+--                    Word1 => WordOut,
+--                    RAM_out => dataW
+--                    );
                     
 U3: Cache_decoder port map(
                     WCh_Cnt => WCh_Cnt_sig,
