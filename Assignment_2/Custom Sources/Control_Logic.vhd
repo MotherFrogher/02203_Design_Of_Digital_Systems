@@ -241,8 +241,7 @@ Addr <= RAddr_Cnt when R_active = '1' and W_active = '0' else
 
 RAddr_Cnt <= std_logic_vector(RAddr_Cnt_up) when Rd_Cnt = "00" else
              std_logic_vector(RAddr_Cnt_u) when Rd_Cnt = "01" else
-             std_logic_vector(RAddr_Cnt_down) when Rd_Cnt = "10" else
-             (others => '-');
+             std_logic_vector(RAddr_Cnt_down);
              
 WAddr_Cnt <= std_logic_vector(WAddr_Cnt_u + RADDR_MAX + 1);
 RCh_Cnt    <= std_logic_vector(RCh_Cnt_u);
@@ -264,10 +263,9 @@ W_en <= W_active;
 W_Sel <= "10" when W_active = '1' and WCh_Cnt_u = 1 and state = PRE_WR else
          "01";
          
--- "11" = Top row register, "10" = center row register, "01" = bottom row resigster
-R_sel <= "11" when Rd_Cnt = 0 else
-         "10" when Rd_Cnt = 1 else
-         "01" when Rd_cnt = 2 else
-         "00";
+R_sel <= "11" when Rd_Cnt = 0 else   -- nothing to latch yet (RAM latency)
+         "00" when Rd_Cnt = 1 else   -- row above  -> Top (Word0-3)
+         "01" when Rd_Cnt = 2 else   -- centre row -> Mid (Word4-7)
+         "10";                       -- row below  -> Bot (Word8-11)
 
 end Behavioral;

@@ -37,8 +37,8 @@ signal B_left, B_center, B_right : std_logic_vector(31 downto 0);
 begin
 
 -- Detection for Top, Bot, Left, Right edges of the image
-top_edge <= '1' when Y_cnt = x"000" else '0'; -- When y = 0
-bot_edge <= '1' when Y_cnt = x"11F" else '0'; -- When y = 287
+top_edge <= '1' when Y_cnt = "000000000" else '0'; -- When y = 0
+bot_edge <= '1' when Y_cnt = "100011111" else '0'; -- When y = 287
 left_edge <= '1' when X_cnt = x"00" else '0'; -- When x = 0
 right_edge <= '1' when X_cnt = x"57" else '0'; -- When x = 87
 
