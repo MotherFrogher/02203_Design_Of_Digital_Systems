@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Thu Nov 26 18:39:19 2026
+# Process ID         : 38420
+# Current directory  : D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent39916 D:\DTU\5. Semester\Design of Digital Systems 02203\02203_Design_Of_Digital_Systems\Assignment_2\task3\task3.xpr
+# Log file           : D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/vivado.log
+# Journal file       : D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3\vivado.jou
+# Running On         : Mathias_PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7900X 12-Core Processor            
+# CPU Frequency      : 4691 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 24
+# Host memory        : 67804 MB
+# Swap memory        : 4294 MB
+# Total Virtual      : 72099 MB
+# Available Virtual  : 52898 MB
+#-----------------------------------------------------------
+start_gui
+open_project {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.xpr}

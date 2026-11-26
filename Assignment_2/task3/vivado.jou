@@ -1,0 +1,153 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Thu Nov 26 18:50:34 2026
+# Process ID         : 38236
+# Current directory  : D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent36248 D:\DTU\5. Semester\Design of Digital Systems 02203\02203_Design_Of_Digital_Systems\Assignment_2\task3\task3.xpr
+# Log file           : D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/vivado.log
+# Journal file       : D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3\vivado.jou
+# Running On         : Mathias_PC
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : AMD Ryzen 9 7900X 12-Core Processor            
+# CPU Frequency      : 4691 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 24
+# Host memory        : 67804 MB
+# Swap memory        : 4294 MB
+# Total Virtual      : 72099 MB
+# Available Virtual  : 52734 MB
+#-----------------------------------------------------------
+start_gui
+open_project {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.xpr}
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+export_ip_user_files -of_objects  [get_files {{D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.srcs/utils_1/imports/synth_1/top.dcp}}] -no_script -reset -force -quiet
+remove_files  -fileset utils_1 {{D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.srcs/utils_1/imports/synth_1/top.dcp}}
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+reset_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+set_property AUTO_INCREMENTAL_CHECKPOINT 0 [get_runs synth_1]
+set_property incremental_checkpoint {} [get_runs synth_1]
+export_ip_user_files -of_objects  [get_files {{D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.srcs/utils_1/imports/synth_1/top.dcp}}] -no_script -reset -force -quiet
+remove_files  -fileset utils_1 {{D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.srcs/utils_1/imports/synth_1/top.dcp}}
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+open_hw_manager
+connect_hw_server -allow_non_jtag
+open_hw_target
+set_property PROGRAM.FILE {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+current_hw_device [get_hw_devices xc7a100t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a100t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+synth_design -top top -part xc7a100tcsg324-1 -lint 
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs synth_1 -jobs 12
+wait_on_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+open_run synth_1 -name synth_1
+get_nets -of [get_pins memory3_inst_0/ram_reg_0_25/ADDRARDADDR[15]]
+get_nets -of [get_pins memory3_inst_0/ram_reg_1_25/ADDRARDADDR[15]]
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+get_nets -of [get_pins memory3_inst_0/ram_reg_0_25/ADDRARDADDR[15]]
+get_nets -of [get_pins memory3_inst_0/ram_reg_1_25/ADDRARDADDR[15]]
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+reset_run synth_1
+update_compile_order -fileset sources_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+reset_run synth_1
+launch_runs impl_1 -jobs 12
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 12
+wait_on_run impl_1
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/DTU/5. Semester/Design of Digital Systems 02203/02203_Design_Of_Digital_Systems/Assignment_2/task3/task3.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]

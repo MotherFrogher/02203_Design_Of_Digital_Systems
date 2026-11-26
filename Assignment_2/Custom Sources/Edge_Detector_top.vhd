@@ -81,7 +81,6 @@ signal WCh_Cnt_sig, RCh_Cnt_sig, px_Sel_sig, W_Sel_sig, R_Sel_sig : std_logic_ve
 signal R_en_sig, W_en_sig : std_logic;
 signal X_Cnt_sig : std_logic_vector(7 downto 0);
 signal Y_Cnt_sig : std_logic_vector(8 downto 0);
-signal RAddr_Cnt_sig, WAddr_Cnt_sig : std_logic_vector(15 downto 0);
 
 signal Word0_sig, Word1_sig, Word2_sig, Word3_sig, Word4_sig, Word5_sig : std_logic_vector(31 downto 0);
 signal Word6_sig, Word7_sig, Word8_sig, Word9_sig, Word10_sig, Word11_sig : std_logic_vector(31 downto 0);
@@ -135,16 +134,17 @@ U1: Input_cache port map(
                     Word11 => Word11_sig
                     );
 
-dataW <= WordOut;                    
---U2: Output_cache port map(
---                    RESET => reset,
---                    CLK => clk,
---                    W_Sel => W_Sel_sig,
---                    W_En => W_En_sig,
---                    Word0 => WordOut,
---                    Word1 => WordOut,
---                    RAM_out => dataW
---                    );
+--dataW <= WordOut;
+
+U2: Output_cache port map(
+                    RESET => reset,
+                    CLK => clk,
+                    W_Sel => W_Sel_sig,
+                    W_En => W_En_sig,
+                    Word0 => WordOut,
+                    Word1 => WordOut,
+                    RAM_out => dataW
+                    );
                     
 U3: Cache_decoder port map(
                     WCh_Cnt => WCh_Cnt_sig,

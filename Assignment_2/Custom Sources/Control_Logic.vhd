@@ -101,7 +101,7 @@ begin
                 W_active <= '1';
             end if;
             
-            if RAddr_Cnt_u = RADDR_MAX then
+            if RAddr_Cnt_u = RADDR_MAX and Rd_Cnt = 3 then
                 next_state <= DRAIN;
             else
                 next_state <= state;
@@ -120,7 +120,11 @@ begin
          
          when DONE =>
             finish <= '1';
-            next_state <= IDLE;
+            if start = '0' then
+                next_state <= IDLE;
+            else
+                next_state <= state;
+            end if;
             
      end case;
 end process;       
@@ -132,7 +136,7 @@ end process;
 READ_COUNTER: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' or Rd_Cnt = "11" then
+        if reset = '1' or state = IDLE or Rd_Cnt = "11" then
             Rd_Cnt <= "00";
         elsif (state = PRELOAD or state = RUN) and R_active = '1' then
             Rd_Cnt <= Rd_Cnt + 1;
@@ -143,7 +147,7 @@ end process;
 Read_Chunk_Counter: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' then
+        if reset = '1' or state = IDLE then
             RCh_Cnt_u <= "00";
 --        elsif State = PRELOAD and Rd_Cnt = "10" and R_active = '1' then
 --            RCh_Cnt_u <= RCh_Cnt_u + 1;
@@ -156,7 +160,7 @@ end process;
 Write_Chunk_Counter: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' then
+        if reset = '1' or state = IDLE then
             WCh_Cnt_u <= "00";
         elsif W_active = '1' then
             WCh_Cnt_u <= WCh_Cnt_u + 1;
@@ -167,7 +171,7 @@ end process;
 X_COUNTER: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' then
+        if reset = '1' or state = IDLE then
             X_Cnt_u <= (others => '0');
         elsif W_active = '1' then
             if X_Cnt_u = X_MAX then
@@ -182,7 +186,7 @@ end process;
 Y_COUNTER: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' then
+        if reset = '1' or state = IDLE then
             Y_Cnt_u <= (others => '0');
         elsif W_active = '1' and X_Cnt_u = X_MAX then   -- same edge X wraps
             if Y_Cnt_u = Y_MAX then
@@ -197,7 +201,7 @@ end process;
 Read_Address_Cnt: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' then
+        if reset = '1' or state = IDLE then
             RAddr_Cnt_u <= (others => '0');
         elsif (state = PRELOAD or state = RUN) and Rd_Cnt = "11" then
             if RAddr_Cnt_u = RADDR_MAX then
@@ -218,7 +222,7 @@ end process;
 Write_Address_Counter: process(clk)
 begin
     if rising_edge(clk) then
-        if reset = '1' then
+        if reset = '1' or state = IDLE then
             WAddr_Cnt_u <= (others => '0');
         elsif W_active = '1' then
             if WAddr_Cnt_u = WADDR_MAX then

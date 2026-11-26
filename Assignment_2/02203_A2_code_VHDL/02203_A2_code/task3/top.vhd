@@ -38,6 +38,9 @@ architecture structure of top is
     signal rst_s : std_logic;
 
     signal addr     : halfword_t;
+    attribute dont_touch : string;
+    attribute dont_touch of addr : signal is "true";
+    
     signal dataR    : word_t;
     signal dataW    : word_t;
     signal en       : bit_t;

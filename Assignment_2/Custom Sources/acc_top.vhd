@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity acc_top is
     port(
-        Px0,Px1,Px2,Px3,Px4,Px5,Px6,Px7,Px8,Px9,
+        Px0,Px1,Px2,Px3,Px4,Px5,Px6,Px7,Px8,Px9 : in  std_logic_vector(7 downto 0);
         Px10,Px11,Px12,Px13,Px14,Px15,Px16,Px17 : in  std_logic_vector(7 downto 0);
         px_Sel : in  std_logic_vector(1 downto 0);
         OUTPUT : out std_logic_vector(31 downto 0)
