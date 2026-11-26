@@ -79,7 +79,7 @@ begin
             reset_sync => rst_s
         );
 
-    accelerator_inst_0 : entity work.acc
+    accelerator_inst_0 : entity work.Edge_Detector_top
         port map(
             clk    => clk,
             reset  => rst_s,
